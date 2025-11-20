@@ -24,11 +24,16 @@ body {
     box-shadow: 0 0 20px rgba(0, 243, 255, 0.2);
     border: 4px solid #333;
     border-radius: 4px;
+    max-width: 100%;
+    height: auto;
 }
 
 canvas {
     display: block;
     background-color: var(--bg-color);
+    width: 100%;
+    height: auto;
+    touch-action: none;
 }
 
 #ui-layer {
@@ -87,8 +92,15 @@ p {
 }
 
 @keyframes blink {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0; }
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0;
+    }
 }
 
 #high-scores {

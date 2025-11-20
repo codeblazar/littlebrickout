@@ -63,10 +63,39 @@ window.addEventListener('keyup', (e) => {
     if (e.code === 'Space') keys.Space = false;
 });
 
+// Touch Events
+canvas.addEventListener('touchstart', (e) => {
+    e.preventDefault();
+    if (gameState === 'START' || gameState === 'GAMEOVER') {
+        handleInput();
+    } else if (gameState === 'PLAYING') {
+        updatePaddlePos(e.touches[0].clientX);
+    }
+}, { passive: false });
+
+canvas.addEventListener('touchmove', (e) => {
+    e.preventDefault();
+    if (gameState === 'PLAYING') {
+        updatePaddlePos(e.touches[0].clientX);
+    }
+}, { passive: false });
+
+function updatePaddlePos(clientX) {
+    const rect = canvas.getBoundingClientRect();
+    const scaleX = canvas.width / rect.width;
+    const canvasX = (clientX - rect.left) * scaleX;
+
+    paddle.x = canvasX - paddle.width / 2;
+
+    // Clamp paddle position
+    if (paddle.x < 0) paddle.x = 0;
+    if (paddle.x + paddle.width > canvas.width) paddle.x = canvas.width - paddle.width;
+}
+
 function handleInput() {
-    if (gameState === 'START' && keys.Space) {
+    if (gameState === 'START') {
         startGame();
-    } else if (gameState === 'GAMEOVER' && keys.Space) {
+    } else if (gameState === 'GAMEOVER') {
         resetGame();
     }
 }
