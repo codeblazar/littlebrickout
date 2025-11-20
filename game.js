@@ -80,6 +80,24 @@ canvas.addEventListener('touchmove', (e) => {
     }
 }, { passive: false });
 
+// Handle clicks on screens (for mouse/tap on UI)
+document.getElementById('start-screen').addEventListener('click', () => {
+    if (gameState === 'START') startGame();
+});
+
+document.getElementById('game-over-screen').addEventListener('click', () => {
+    if (gameState === 'GAMEOVER') resetGame();
+});
+
+// Resize handling
+window.addEventListener('resize', () => {
+    // Force redraw or layout update if needed
+    // Canvas scales via CSS, but we might need to ensure paddle isn't out of bounds
+    if (paddle.x + paddle.width > canvas.width) {
+        paddle.x = canvas.width - paddle.width;
+    }
+});
+
 function updatePaddlePos(clientX) {
     const rect = canvas.getBoundingClientRect();
     const scaleX = canvas.width / rect.width;
