@@ -144,7 +144,7 @@ const brickInfo = {
     h: 20,
     padding: 10,
     offsetX: 45,
-    offsetY: 60,
+    offsetY: 80,
     visible: true
 };
 
