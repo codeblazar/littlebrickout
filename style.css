@@ -22,15 +22,77 @@ body {
 #game-container {
     position: relative;
     box-shadow: 0 0 20px rgba(0, 243, 255, 0.2);
+    border: 4px solid #333;
+    border-radius: 4px;
+    max-width: 100%;
+    max-height: 100vh;
+    aspect-ratio: 4/3;
+}
+
+canvas {
+    display: block;
+    background-color: var(--bg-color);
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    touch-action: none;
+}
+
+#ui-layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.screen {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.85);
+    opacity: 0;
+    transition: opacity 0.3s;
+    pointer-events: none;
+}
+
+.screen.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+h1 {
+    font-size: 48px;
+    color: var(--neon-blue);
+    text-shadow: 4px 4px 0px var(--neon-pink);
     margin-bottom: 20px;
     text-align: center;
     line-height: 1.5;
+}
+
+/* Mobile responsive text */
+@media (max-width: 600px) {
+    h1 {
+        font-size: 24px;
+    }
+
+    p {
+        font-size: 12px;
+    }
 }
 
 p {
     font-size: 16px;
     color: var(--neon-green);
     animation: blink 1s infinite;
+    text-align: center;
 }
 
 #hud {
